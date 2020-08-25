@@ -29,7 +29,6 @@ pipeline {
           def customImage = docker.build("vanessatchinda/devops-pipeline:${env.BUILD_ID}")
           customImage.push()
           }
-    }
-        
-    }
+    }       
+  }
 }
