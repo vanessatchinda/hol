@@ -22,7 +22,7 @@ pipeline {
   steps {
     script {
           checkout scm
-          docker.withRegistry('', 'DockerUserID') {
+          docker.withRegistry('', 'DockerRegisteryID') {
           def customImage = docker.build("vanessatchinda/hol-pipeline:${env.BUILD_ID}")
           customImage.push()
           }
