@@ -1,4 +1,3 @@
-
 pipeline {
     agent any
     tools {
@@ -30,5 +29,6 @@ pipeline {
           customImage.push()
           }
     }       
-  }
+ 
+      }
 }
