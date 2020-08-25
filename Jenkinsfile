@@ -1,27 +1,35 @@
+
 pipeline {
     agent any
+    tools {
+        maven 'M2_HOME'
+    }
 
     stages {
-        stage('Hello') {
-            steps {
-                echo 'Hello World'
-            }
-        }
- stage('build') {
+        
+       stage('build') {
             steps {
                 echo 'Hello build'
-            }
-        }  
- stage('deploy') {
-            steps {
-                echo 'Hello deploy'
+                sh 'mvn clean'
+                sh  'mvn install'
+                sh 'mvn package'
             }
         }
-  stage('test') {
+        stage('test') {
             steps {
-                echo 'Hello test'
+                sh 'mvn test'
+                
             }
         }
+        stage ('build and publish image') {
+      steps {
+        script {
+          checkout scm
+          docker.withRegistry('', 'dockeruser') {
+          def customImage = docker.build("vanessatchinda/devops-pipeline:${env.BUILD_ID}")
+          customImage.push()
+          }
+    }
+        
     }
 }
-
