@@ -3,7 +3,6 @@ pipeline {
     tools {
         maven 'M2_HOME'
     }
-
     stages {
         
         stage('build') {
@@ -25,7 +24,7 @@ pipeline {
           checkout scm
           docker.withRegistry('', 'DockerRegisteryID') {
           def customImage = docker.build("vanessatchinda/hol-pipeline:${env.BUILD_ID}")
-          def customImage1 = docker.build("vanessatchinda/hol-pipeline)
+          def customImage1 = docker.build("vanessatchinda/hol-pipeline
           customImage.push()
           customImage1.push()
           }
